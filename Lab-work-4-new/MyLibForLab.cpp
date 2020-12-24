@@ -5,6 +5,18 @@
 
 namespace mylab {
 
+	int my_strcmp(const char* str1, const char* str2)
+	{
+		int s1;
+		int s2;
+		do {
+			s1 = *str1++;
+			s2 = *str2++;
+			if (s1 == 0)
+				break;
+		} while (s1 == s2);
+		return (s1 < s2) ? -1 : (s1 > s2);
+	}
 	char* get_string(int* len) {
 		*len = 0;
 		int capacity = 1;
@@ -71,12 +83,12 @@ namespace mylab {
 		}
 		return count;
 	}
-	char** parseForNumbers(char* text, int len_text, int* len_mass) {
+	char** parse_numbers_char(char* text, int len_text, int* len_mass) {
 		int i = 0, j = 0, k = 0;;
 		char** numbers_char = (char**)malloc(sizeof(char**) * count_numbers(text, len_text));
 		if (numbers_char == NULL)
 		{
-			exit(1);
+			return NULL;
 		}
 		while (i < len_text)
 		{
@@ -86,7 +98,7 @@ namespace mylab {
 				numbers_char[k] = (char*)malloc(sizeof(char*) * len + 1);
 				if (numbers_char[k] == NULL)
 				{
-					exit(1);
+					return NULL;
 				}
 				while (j < len_text && j < len && i < len_text)
 				{
@@ -102,7 +114,38 @@ namespace mylab {
 		*len_mass = k;
 		return numbers_char;
 	}
+	int isContainsWord(char** set, int len_set, char* word) {
+		int i = 0;
+		while (i < len_set)
+		{
+			if (my_strcmp(set[i], word) == 0)
+			{
+				return 1;
+			}
+			i++;
+		}
+		return 0;
+	}
+	char** set_numbers_char(char** numbers, int len_numbers, int* len_set) {
+		char** set = (char**)malloc(sizeof(char**) * len_numbers);
+		if (set == NULL)
+		{
+			return NULL;
+		}
+		int i = 0, j = 0;
+		set[j++] = numbers[i++];
+		while (i < len_numbers)
+		{
+			if (isContainsWord(set, j, numbers[i]) == 0)
+			{
+				set[j++] = numbers[i];
+			}
+			i++;
+		}
+		*len_set = j;
+		return set;
 
+	}
 
 
 }

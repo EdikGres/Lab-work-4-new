@@ -9,17 +9,25 @@ int main() {
 	
 	printf("input text: ");
 	int len = 0;
-	char* sex = get_string(&len);
-	//printf("%d\n", count_numbers(sex, len));
-	printf("%d\n", len_number(sex, 0, len));
+	char* text = get_string(&len);
+	
 	int len_numbers = 0;
-	char** numbers = parseForNumbers(sex, len, &len_numbers);
+	char** numbers = parse_numbers_char(text, len, &len_numbers);
+
+	printf("\nNumbers from text:\n\t");
 	for (int i = 0; i < len_numbers; i++)
 	{
 		printf("%s ", numbers[i]);
 	}
+	int len_set = 0;
+	char** set = set_numbers_char(numbers, len_numbers, &len_set);
 
+	printf("\n\nSET:\n\t");
 
+	for (int i = 0; i < len_set; i++)
+	{
+		printf("%s ", set[i]);
+	}
 
 	return 0;
 }
