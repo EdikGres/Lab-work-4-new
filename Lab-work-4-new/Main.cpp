@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "MyLibForLab.h"
+#include "MyMap.h"
 /*
 	Сделать работу с указателями на ТЕКСТ НО НЕ МАССИВ С ЦИФРАМИ!!!
 */
@@ -28,6 +29,29 @@ int main() {
 	{
 		printf("%s ", set[i]);
 	}
+
+	using namespace mymap;
+	
+	map* maps = get_mass(&len_set);
+	
+	//fill_map(maps, numbers, len_numbers, set, len_set);
+	maps[0].number = set[0];
+	maps[0].counter = 57;
+
+
+
+
+	
+	printf("\n");
+	for (int i = 0; i < 1; i++)
+	{
+		printf("%s [%d],  ", maps[i].number, maps[i].counter);
+	} 
+
+
+	
+
+
 
 	return 0;
 }
